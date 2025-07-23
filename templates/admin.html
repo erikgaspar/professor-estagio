@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel do Administrador</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen p-8">
+
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center">Painel do Administrador</h1>
+
+    {% if usuarios %}
+      <div class="space-y-4">
+        {% for u in usuarios %}
+          <div class="bg-gray-800 p-4 rounded-xl flex justify-between items-center">
+            <div>
+              <p><strong>Nome:</strong> {{ u[1] }}</p>
+              <p><strong>Email:</strong> {{ u[2] }}</p>
+              <p><strong>Cadastro:</strong> {{ u[5] }}</p>
+            </div>
+            <div class="space-x-2">
+              <form action="/aprovar/{{ u[0] }}" method="POST" style="display:inline;">
+                <button class="bg-green-600 hover:bg-green-500 px-4 py-2 rounded">Aprovar</button>
+              </form>
+              <form action="/rejeitar/{{ u[0] }}" method="POST" style="display:inline;">
+                <button class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded">Rejeitar</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center text-gray-400">Nenhum cadastro pendente.</p>
+    {% endif %}
+  </div>
+
+</body>
+</html>

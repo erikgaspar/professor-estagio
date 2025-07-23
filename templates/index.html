@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Professor Estágio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PWA -->
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <meta name="theme-color" content="#6d28d9">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oxanium:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+
+</head>
+
+<body class="flex items-center justify-center min-h-screen p-4">
+
+  <!-- Tela de Chat (oculta por padrão) -->
+  <div id="chat-screen" class="glass-container w-full max-w-2xl h-[95vh] max-h-[800px] flex flex-col rounded-2xl">
+    <header class="flex items-center p-4 border-b border-slate-700/50 flex-shrink-0">
+      <img src="{{ url_for('static', filename='assets/professor.png') }}" alt="Foto do Professor Estágio"
+        class="w-16 h-16 rounded-full object-cover flex-shrink-0">
+      <div class="ml-6">
+        <h1 class="text-lg font-bold text-slate-200">Professor Estágio</h1>
+        <p class="text-sm text-slate-400">Assistente de IA desenvolvido por Erik Gaspar</p>
+      </div>
+      <a href="/logout"
+        class="ml-auto bg-red-600 hover:bg-red-500 text-white px-4 py-1.5 rounded text-sm font-semibold transition">
+        Sair
+      </a>
+    </header>
+    <main id="chat-window" class="flex-1 p-6 overflow-y-auto space-y-6">
+      <div class="chat-message bot">
+        <div class="message-bubble">
+          <p class="mb-2">Eu sou o Professor Estágio — seu guia descomplicado pela Lei nº 11.788/2008 e normas internas
+            do IEL Paraná.</p>
+          <p>Aqui é papo reto e sem juridiquês: pergunte o que quiser sobre contrato, termo de compromisso, carga
+            horária… que eu respondo com base apenas nos documentos oficiais.</p>
+        </div>
+      </div>
+    </main>
+    <footer class="p-4 border-t border-slate-700/50 bg-slate-900/50 rounded-b-2xl flex-shrink-0">
+      <div class="flex items-center bg-slate-800 rounded-xl p-1.5">
+        <textarea id="input-msg" rows="1"
+          class="w-full px-2 py-1.5 bg-transparent border-none rounded-lg resize-none focus:ring-0 focus:outline-none text-slate-200 placeholder-slate-500"
+          placeholder="Digite sua pergunta..."></textarea>
+        <button type="button" id="send-btn"
+          class="ml-2 p-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 disabled:bg-purple-900/50 disabled:cursor-not-allowed">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Template para mensagens do chat -->
+  <template id="message-template">
+    <div class="chat-message">
+      <div class="message-bubble"></div>
+    </div>
+  </template>
+
+  <!-- =============================================================== -->
+  <!-- ÁUDIOS CUSTOMIZÁVEIS (com lógica Flask) -->
+  <!-- =============================================================== -->
+  <audio id="typing-sound" src="{{ url_for('static', filename='assets/typing_sound.wav') }}" preload="auto"></audio>
+  <audio id="message-arrived-sound" src="{{ url_for('static', filename='assets/arrived_sound.mp3') }}"
+    preload="auto"></audio>
+  <!-- =============================================================== -->
+
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+
+</html>
