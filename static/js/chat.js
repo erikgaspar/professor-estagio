@@ -1,3 +1,15 @@
+// static/js/chat.js
+
+// logo acima de tudo,
+// garanta que existam no seu HTML dois <audio> com esses IDs:
+//   <audio id="typing-sound" …>
+//   <audio id="message-arrived-sound" …>
+
+const typingSound = document.getElementById("typing-sound");
+const messageArrivedSound = document.getElementById("message-arrived-sound");
+
+// … resto do seu código …
+
 // guarda todo o histórico de mensagens
 const chatHistory = [];
 
@@ -107,12 +119,3 @@ messageInput.addEventListener("input", () => {
     messageInput.style.height = Math.min(messageInput.scrollHeight, 120) + "px";
 });
 
-// Service Worker registration (optional, for PWA functionality)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker
-            .register("{{ url_for('static', filename='sw.js') }}")
-            .then(reg => console.log('SW registrado:', reg.scope))
-            .catch(err => console.log('Falha ao registrar SW:', err));
-    });
-}
